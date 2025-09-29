@@ -4,5 +4,5 @@
 ### Как это работает?
 1. Плагин Статистика создает json с результатами просмотра фильмов
 2. JSON сохраняется в Gist ([пример](https://gist.github.com/lampab/86fd94b5e689041706a3bcdd5968340b))
-3. При открытии lampab.github.io в URL передается id Gist'a ([пример](https://lamp-a.github.io/#86fd94b5e689041706a3bcdd5968340b))
-4. Код ([index.html](https://github.com/lamp-a/lamp-a.github.io/blob/60a573256458bdd2497fb4df78f54eb21f6da37b/index.html#L308)) забирает данные из Gist'a для формирования страницы "Итоги года"
+3. При открытии lampab.github.io в URL передается id Gist'a ([пример](https://lampab.github.io/#86fd94b5e689041706a3bcdd5968340b))
+4. Код ([index.html](https://github.com/lampab/lampab.github.io/index.html#L308)) забирает данные из Gist'a для формирования страницы "Итоги года"

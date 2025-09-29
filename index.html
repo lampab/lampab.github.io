@@ -1,5 +1,335 @@
 <!DOCTYPE html>
-<html>
-<head><title>Test</title></head>
-<body><h1>It works!</h1></body>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Lampa:  итоги года</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <!-- Swiper -->
+    <div class="swiper-container mySwiper">
+      <div class="swiper-wrapper">
+        <div class="swiper-slide slide-1 title-text">
+          Ваши итоги <span id="span-year" style="display: contents">2025</span> года с Лампой
+        </div>
+        <div class="swiper-slide slide-2">
+          <div class="image-container">
+            <img id="img-firstMovieOfYear-movie-i" />
+          </div>
+          <div class="caption">
+            <span id="span-firstMovieOfYear-date"></span> вы посмотрели первый фильм в <span id="span-firstMovieOfYear-year"></span> году
+          </div>
+        </div>
+        <div class="swiper-slide slide-3">
+          <div class="caption">вы смотрели фильмы</div>
+          <div class="large-text"><span id="span-totalTime"></span></div>
+          <div class="caption"><span id="span-totalTime-hours"></span></div>
+        </div>
+        <div class="swiper-slide slide-4">
+          <div class="image-container">
+            <a id="link-watchedMovies-examples0" target="_blank">
+              <img id="img-watchedMovies-examples0-i" />
+            </a>
+            <a id="link-watchedMovies-examples1" target="_blank">
+              <img id="img-watchedMovies-examples1-i" />
+            </a>
+            <a id="link-watchedMovies-examples2" target="_blank">
+              <img id="img-watchedMovies-examples2-i" />
+            </a>
+          </div>
+          <div class="caption">вы посмотрели <span id="span-watchedMovies-count"></span> <span id="span-watchedMovies-count-movies"></div>
+        </div>
+        <div class="swiper-slide slide-5">
+          <div class="large-text"><span id="span-moviesWithReactions"></span></div>
+          <div class="caption"><span id="span-moviesWithReactions-reactions"></span> вы поставили</div>
+        </div>
+        <div class="swiper-slide slide-6">
+          <div class="large-text"><span id="span-mostPopularReaction"></span></div>
+          <div class="caption">самая частая ваша реакция</div>
+        </div>
+        <div class="swiper-slide slide-7">
+          <div class="image-container">
+            <a id="link-topGenre-examples0" target="_blank">
+              <img id="img-topGenre-examples0-i" />
+            </a>
+            <a id="link-topGenre-examples1" target="_blank">
+              <img id="img-topGenre-examples1-i" />
+            </a>
+            <a id="link-topGenre-examples2" target="_blank">
+              <img id="img-topGenre-examples2-i" />
+            </a>
+          </div>
+          <div class="caption">
+            <span id="span-topGenre-genre"></span> - чаще всего вы смотрели кино этого жанра
+          </div>
+        </div>
+        <div class="swiper-slide slide-8">
+          <div class="large-text"><span id="span-mostPopularDay"></span></div>
+          <div class="caption">больше всего фильмов вы просмотрели в этот день</div>
+        </div>
+        <div class="swiper-slide slide-9">
+          <div class="large-text"><span id="span-mostPopularMonth"></span></div>
+          <div class="caption">больше всего фильмов вы просмотрели в этом месяце</div>
+        </div>
+        <div class="swiper-slide slide-10">
+          <div class="image-container">
+            <img id="img-maxTimeMovie-movie-i" />
+          </div>
+          <div class="caption">
+            <span id="span-maxTimeMovie-time"></span> <span id="span-maxTimeMovie-time-minutes"></span> длился ваш самый длинный фильм этого года
+          </div>
+        </div>
+        <div class="swiper-slide slide-11">
+          <div class="caption">
+            <span id="span-unwatchedMovies-count"></span> <span id="span-unwatchedMovies-count-movies"></span> вы начали смотреть, но не досмотрели :(
+          </div>
+          <div class="image-container">
+            <a id="link-unwatchedMovies-examples0" target="_blank">
+              <img id="img-unwatchedMovies-examples0-i" />
+            </a>
+            <a id="link-unwatchedMovies-examples1" target="_blank">
+              <img id="img-unwatchedMovies-examples1-i" />
+            </a>
+            <a id="link-unwatchedMovies-examples2" target="_blank">
+              <img id="img-unwatchedMovies-examples2-i" />
+            </a>
+          </div>
+        </div>
+        <div class="swiper-slide slide-12">
+          <div class="large-text"><span id="span-cardsViewedOnly-count"></span></div>
+          <div class="caption">карточек вы посмотрели, но кино не стали смотреть</div>
+        </div>
+      </div>
+      <div class="swiper-button-next"></div>
+      <div class="swiper-button-prev"></div>
+      <div class="swiper-pagination"></div>
+    </div>
+
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+      var swiper = new Swiper(".mySwiper", {
+        slidesPerView: 1,
+        spaceBetween: 30,
+        loop: true,
+        pagination: {
+          el: ".swiper-pagination",
+          clickable: true,
+        },
+        navigation: {
+          nextEl: ".swiper-button-next",
+          prevEl: ".swiper-button-prev",
+        },
+      });
+    </script>    
+    <script>
+      function getNumEnding(iNumber, aEndings)
+      {
+          var sEnding, i;
+          iNumber = iNumber % 100;
+          if (iNumber>=11 && iNumber<=19) {
+              sEnding=aEndings[2];
+          }
+          else {
+              i = iNumber % 10;
+              switch (i)
+              {
+                  case (1): sEnding = aEndings[0]; break;
+                  case (2):
+                  case (3):
+                  case (4): sEnding = aEndings[1]; break;
+                  default: sEnding = aEndings[2];
+              }
+          }
+          return sEnding;
+      }
+
+      function removeSlidesByClass(className) {
+        var slides = swiper.slides;
+
+        for (var i = slides.length - 1; i >= 0; i--) {
+          if (slides[i].classList.contains(className)) {
+            swiper.removeSlide(i);
+          }
+        }
+      }
+
+      function replaceValues(json) {
+        document.getElementById('span-year').innerHTML = json.year;
+
+        if (json && json.firstMovieOfYear) {
+          document.getElementById('span-firstMovieOfYear-year').innerHTML = json.year;
+          document.getElementById('span-firstMovieOfYear-date').innerHTML = json.firstMovieOfYear.date;
+          document.getElementById('img-firstMovieOfYear-movie-i').src = json.firstMovieOfYear.movie.i;
+          document.getElementById('img-firstMovieOfYear-movie-i').style.display = 'block';
+        } else {
+          removeSlidesByClass('slide-2');
+        }
+
+        if (json && json.totalTime && json.totalTime > 0) {
+          document.getElementById('span-totalTime').innerHTML = json.totalTime;
+          document.getElementById('span-totalTime-hours').innerHTML = getNumEnding(json.totalTime, ['час', 'часа', 'часов']);
+        } else {
+          removeSlidesByClass('slide-3');
+        }
+
+        if (json && json.watchedMovies && json.watchedMovies.count > 0) {
+          document.getElementById('span-watchedMovies-count').innerHTML = json.watchedMovies.count;
+          document.getElementById('span-watchedMovies-count-movies').innerHTML = getNumEnding(json.watchedMovies.count, ['фильм', 'фильма', 'фильмов']);
+          if (json.watchedMovies.examples[0]) {
+            document.getElementById('img-watchedMovies-examples0-i').style.display = 'block';
+            document.getElementById('img-watchedMovies-examples0-i').src = json.watchedMovies.examples[0].i;
+            document.getElementById('link-watchedMovies-examples0').href = `https://cub.rip/card/tmdb/movie/${json.watchedMovies.examples[0].id}`;
+          }
+          if (json.watchedMovies.examples[1]) {
+            document.getElementById('img-watchedMovies-examples1-i').style.display = 'block';
+            document.getElementById('img-watchedMovies-examples1-i').src = json.watchedMovies.examples[1].i;
+            document.getElementById('link-watchedMovies-examples1').href = `https://cub.rip/card/tmdb/movie/${json.watchedMovies.examples[1].id}`;
+          }
+          if (json.watchedMovies.examples[2]) {
+            document.getElementById('img-watchedMovies-examples2-i').style.display = 'block';
+            document.getElementById('img-watchedMovies-examples2-i').src = json.watchedMovies.examples[2].i;
+            document.getElementById('link-watchedMovies-examples2').href = `https://cub.rip/card/tmdb/movie/${json.watchedMovies.examples[2].id}`;
+          }
+        } else {
+          removeSlidesByClass('slide-4');
+        }
+
+        if (json && json.moviesWithReactions) {
+          document.getElementById('span-moviesWithReactions').innerHTML = json.moviesWithReactions;
+          document.getElementById('span-moviesWithReactions-reactions').innerHTML = getNumEnding(json.moviesWithReactions, ['реакцию', 'реакции', 'реакций']);
+          
+        } else {
+          removeSlidesByClass('slide-5');
+        }
+
+        if (json && json.mostPopularReaction) {
+          var reactions = {
+            'fire': '🔥',
+            'nice': '👍',
+            'think': '🤔',
+            'bore': '🥱',
+            'shit': '💩'
+          }
+          document.getElementById('span-mostPopularReaction').innerHTML = reactions[json.mostPopularReaction];
+        } else {
+          removeSlidesByClass('slide-6');
+        }
+
+        if (json && json.topGenre && json.topGenre.genre) {
+          document.getElementById('span-topGenre-genre').innerHTML = json.topGenre.genre; 
+          if (json.topGenre.examples[0]) {
+            document.getElementById('img-topGenre-examples0-i').style.display = 'block';
+            document.getElementById('img-topGenre-examples0-i').src = json.topGenre.examples[0].i;
+            document.getElementById('link-topGenre-examples0').href = `https://cub.rip/card/tmdb/movie/${json.topGenre.examples[0].id}`;
+          }
+          if (json.topGenre.examples[1]) {
+            document.getElementById('img-topGenre-examples1-i').style.display = 'block';
+            document.getElementById('img-topGenre-examples1-i').src = json.topGenre.examples[1].i;
+            document.getElementById('link-topGenre-examples1').href = `https://cub.rip/card/tmdb/movie/${json.topGenre.examples[1].id}`;
+          }
+          if (json.topGenre.examples[2]) {
+            document.getElementById('img-topGenre-examples2-i').style.display = 'block';
+            document.getElementById('img-topGenre-examples2-i').src = json.topGenre.examples[2].i;
+            document.getElementById('link-topGenre-examples2').href = `https://cub.rip/card/tmdb/movie/${json.topGenre.examples[2].id}`;
+          }          
+        } else {
+          removeSlidesByClass('slide-7');
+        }
+
+        if (json && json.mostPopularDay) {
+          document.getElementById('span-mostPopularDay').innerHTML = json.mostPopularDay;  
+        } else {
+          removeSlidesByClass('slide-8');
+        }
+        
+        if (json && json.mostPopularMonth) {
+          document.getElementById('span-mostPopularMonth').innerHTML = json.mostPopularMonth;  
+        } else {
+          removeSlidesByClass('slide-9');
+        }
+        
+        if (json && json.maxTimeMovie) {
+          document.getElementById('span-maxTimeMovie-time').innerHTML = json.maxTimeMovie.time;          
+          document.getElementById('img-maxTimeMovie-movie-i').src = json.maxTimeMovie.movie.i;
+          document.getElementById('img-maxTimeMovie-movie-i').style.display = 'block';          
+          document.getElementById('span-maxTimeMovie-time-minutes').innerHTML = getNumEnding(json.maxTimeMovie.time, ['минута', 'минуты', 'минут']);          
+
+        } else {
+          removeSlidesByClass('slide-10');
+        }
+
+        if (json && json.unwatchedMovies && json.unwatchedMovies.count > 0) {
+          document.getElementById('span-unwatchedMovies-count').innerHTML = json.unwatchedMovies.count;
+          document.getElementById('span-unwatchedMovies-count-movies').innerHTML = getNumEnding(json.unwatchedMovies.count, ['фильм', 'фильма', 'фильмов']);
+
+          if (json.unwatchedMovies.examples[0]) {
+            document.getElementById('img-unwatchedMovies-examples0-i').style.display = 'block';
+            document.getElementById('img-unwatchedMovies-examples0-i').src = json.unwatchedMovies.examples[0].i;
+            document.getElementById('link-unwatchedMovies-examples0').href = `https://cub.rip/card/tmdb/movie/${json.unwatchedMovies.examples[0].id}`;
+          }
+          if (json.unwatchedMovies.examples[1]) {
+            document.getElementById('img-unwatchedMovies-examples1-i').style.display = 'block';
+            document.getElementById('img-unwatchedMovies-examples1-i').src = json.unwatchedMovies.examples[1].i;
+            document.getElementById('link-unwatchedMovies-examples1').href = `https://cub.rip/card/tmdb/movie/${json.unwatchedMovies.examples[1].id}`;
+          } else {
+            document.getElementById('link-unwatchedMovies-examples1').style.display = 'none';
+          }
+          if (json.unwatchedMovies.examples[2]) {
+            document.getElementById('img-unwatchedMovies-examples2-i').style.display = 'block';
+            document.getElementById('img-unwatchedMovies-examples2-i').src = json.unwatchedMovies.examples[2].i;
+            document.getElementById('link-unwatchedMovies-examples2').href = `https://cub.rip/card/tmdb/movie/${json.unwatchedMovies.examples[2].id}`;
+          } else {
+            document.getElementById('link-unwatchedMovies-examples2').style.display = 'none';
+          }
+        } else {
+          removeSlidesByClass('slide-11');
+        }
+
+        if (json && json.cardsViewedOnly && json.cardsViewedOnly.count > 0) {
+          document.getElementById('span-cardsViewedOnly-count').innerHTML = json.cardsViewedOnly.count;
+        } else {
+          removeSlidesByClass('slide-12');
+        }
+
+      }
+    </script>    
+    <script>
+     if (window.location.hash) {
+       var fragment = window.location.hash.substring(1);
+       var scriptUrl = 'https://gist.githubusercontent.com/lamp-a/' + fragment + '/raw';
+
+       var xhr = new XMLHttpRequest();
+       xhr.open('GET', scriptUrl, true);
+       xhr.onreadystatechange = function() {
+         if (xhr.readyState === 4 && xhr.status === 200) {
+           eval(xhr.responseText);
+
+           replaceValues(json);
+         }
+       };
+       xhr.send();
+     } else {
+      var json = {'year': 2025};
+      replaceValues(json);
+      console.log(json);
+      // swiper.removeSlide(2);
+      // swiper.removeSlide(3);
+      // swiper.removeSlide(4);
+      // swiper.removeSlide(5);
+      // swiper.removeSlide(6);
+      // swiper.removeSlide(7);
+      // swiper.removeSlide(8);
+      // swiper.removeSlide(9);
+     }
+    </script>
+  </body>
 </html>
